@@ -7,8 +7,7 @@ import { useRoute } from '@react-navigation/native';
 
 const SearchResults = (props) => {
   const route = useRoute();
-  // const {originPlace, destinationPlace} = route.params
-  const {originPlace, destinationPlace} = {}
+  const {originPlace, destinationPlace} = route.params
 
   return (
     <View style={{display: 'flex', justifyContent: 'space-between'}}>

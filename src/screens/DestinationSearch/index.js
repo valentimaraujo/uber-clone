@@ -3,6 +3,8 @@ import {View, TextInput, SafeAreaView} from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useNavigation } from '@react-navigation/native';
 
+import config from '../../config';
+
 import styles from './styles.js';
 import PlaceRow from "./PlaceRow";
 
@@ -55,7 +57,7 @@ const DestinationSearch = (props) => {
           }}
           fetchDetails
           query={{
-            key: 'xxxxxxxxxxxxxxxx',
+            key: config.GOOGLE_MAPS_APIKEY,
             language: 'en',
           }}
           renderRow={(data) => <PlaceRow data={data} />}
@@ -80,7 +82,7 @@ const DestinationSearch = (props) => {
           }}
           fetchDetails
           query={{
-            key: 'xxxxxxxxxxxxxxxx',
+            key: config.GOOGLE_MAPS_APIKEY,
             language: 'en',
           }}
           renderRow={(data) => <PlaceRow data={data} />}
