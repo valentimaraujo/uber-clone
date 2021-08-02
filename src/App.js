@@ -1,11 +1,16 @@
 import React, {useEffect} from 'react';
-import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
+import { StatusBar } from 'expo-status-bar';
 import * as Location from 'expo-location';
+import Amplify from 'aws-amplify';
+import { withAuthenticator } from 'aws-amplify-react-native'
+
+import config from './aws-exports';
+Amplify.configure(config);
 
 import Router from './navigation/Root';
 
-export default function App() {
+const App = () => {
   useEffect(() => {
     (async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
@@ -27,3 +32,5 @@ export default function App() {
     </>
   );
 }
+
+export default withAuthenticator(App)
