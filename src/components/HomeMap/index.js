@@ -1,8 +1,10 @@
-import React, {useState} from "react";
-import { Image, FlatList } from "react-native";
+import React, {useEffect, useState} from "react";
+import {Image, FlatList} from "react-native";
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
+import {API, graphqlOperation} from 'aws-amplify';
+import {listCars} from '../../graphql/queries';
 
-import cars from '../../assets/data/cars';
+// import cars from '../../assets/data/cars';
 
 const HomeMap = (props) => {
   const [currentLocation] = useState({
@@ -11,6 +13,8 @@ const HomeMap = (props) => {
     latitudeDelta: 0.0222,
     longitudeDelta: 0.0121,
   });
+
+  const [cars, setCars] = useState([])
 
   const getImage = (type) => {
     if (type === 'UberX') {
@@ -21,6 +25,19 @@ const HomeMap = (props) => {
     }
     return require('../../assets/images/cars/top-UberXL.png');
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const showCars = await API.graphql(graphqlOperation(listCars));
+        if(showCars.data.listCars.items) {
+          setCars(showCars.data.listCars.items)
+        }
+      } catch (err) {
+        console.log('===>>> ERR', err)
+      }
+    })()
+  }, [])
 
   return (
     <MapView
@@ -35,8 +52,8 @@ const HomeMap = (props) => {
         >
           <Image
             style={{
-              width: 70,
-              height: 70,
+              width: 35,
+              height: 35,
               resizeMode: 'contain',
               transform: [{
                 rotate: `${car.heading}deg`
