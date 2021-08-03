@@ -1,0 +1,18 @@
+module.exports = function(api) {
+  api.cache(false);
+  return {
+    presets: [
+      'babel-preset-expo'
+    ],
+    'plugins': [
+      ["dotenv-import", {
+        "moduleName": "@env",
+        "path": ".env",
+        "blacklist": null,
+        "whitelist": null,
+        "safe": false,
+        "allowUndefined": false
+      }]
+    ]
+  };
+};
