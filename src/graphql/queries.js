@@ -13,7 +13,7 @@ export const getUser = /* GraphQL */ `
           createdAt
           type
           originLatitude
-          oreiginLongitude
+          originLongitude
           destLatitude
           destLongitude
           userId
@@ -62,7 +62,7 @@ export const getCar = /* GraphQL */ `
           createdAt
           type
           originLatitude
-          oreiginLongitude
+          originLongitude
           destLatitude
           destLongitude
           userId
@@ -106,7 +106,7 @@ export const getOrder = /* GraphQL */ `
       createdAt
       type
       originLatitude
-      oreiginLongitude
+      originLongitude
       destLatitude
       destLongitude
       userId
@@ -149,7 +149,7 @@ export const listOrders = /* GraphQL */ `
         createdAt
         type
         originLatitude
-        oreiginLongitude
+        originLongitude
         destLatitude
         destLongitude
         userId

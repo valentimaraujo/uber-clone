@@ -14,19 +14,12 @@ const RouteMap = ({ origin, destination }) => {
   const originLoc = {
     latitude: origin.details.geometry.location.lat,
     longitude: origin.details.geometry.location.lng,
-    // latitude: -23.61560170000001,
-    // longitude: -46.76984249999999,
   };
 
   const destinationLoc = {
     latitude: destination.details.geometry.location.lat,
     longitude: destination.details.geometry.location.lng,
-    // latitude: -23.6543466,
-    // longitude: -46.7896513,
   };
-
-  // console.log('======== ORIGINLOC***\n', origin)
-  // console.log('======== DESTINATIONLOC***\n', destination)
 
   return (
     <MapView

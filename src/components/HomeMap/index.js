@@ -34,7 +34,7 @@ const HomeMap = (props) => {
           setCars(showCars.data.listCars.items)
         }
       } catch (err) {
-        console.log('===>>> ERR', err)
+        console.log('ERR', err)
       }
     })()
   }, [])

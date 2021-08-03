@@ -13,7 +13,7 @@ export const onCreateUser = /* GraphQL */ `
           createdAt
           type
           originLatitude
-          oreiginLongitude
+          originLongitude
           destLatitude
           destLongitude
           userId
@@ -39,7 +39,7 @@ export const onUpdateUser = /* GraphQL */ `
           createdAt
           type
           originLatitude
-          oreiginLongitude
+          originLongitude
           destLatitude
           destLongitude
           userId
@@ -65,7 +65,7 @@ export const onDeleteUser = /* GraphQL */ `
           createdAt
           type
           originLatitude
-          oreiginLongitude
+          originLongitude
           destLatitude
           destLongitude
           userId
@@ -93,7 +93,7 @@ export const onCreateCar = /* GraphQL */ `
           createdAt
           type
           originLatitude
-          oreiginLongitude
+          originLongitude
           destLatitude
           destLongitude
           userId
@@ -121,7 +121,7 @@ export const onUpdateCar = /* GraphQL */ `
           createdAt
           type
           originLatitude
-          oreiginLongitude
+          originLongitude
           destLatitude
           destLongitude
           userId
@@ -149,7 +149,7 @@ export const onDeleteCar = /* GraphQL */ `
           createdAt
           type
           originLatitude
-          oreiginLongitude
+          originLongitude
           destLatitude
           destLongitude
           userId
@@ -170,7 +170,7 @@ export const onCreateOrder = /* GraphQL */ `
       createdAt
       type
       originLatitude
-      oreiginLongitude
+      originLongitude
       destLatitude
       destLongitude
       userId
@@ -208,7 +208,7 @@ export const onUpdateOrder = /* GraphQL */ `
       createdAt
       type
       originLatitude
-      oreiginLongitude
+      originLongitude
       destLatitude
       destLongitude
       userId
@@ -246,7 +246,7 @@ export const onDeleteOrder = /* GraphQL */ `
       createdAt
       type
       originLatitude
-      oreiginLongitude
+      originLongitude
       destLatitude
       destLongitude
       userId

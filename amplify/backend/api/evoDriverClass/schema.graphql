@@ -25,7 +25,7 @@ type Order @model
   type: String!
 
   originLatitude: Float!
-  oreiginLongitude: Float!
+  originLongitude: Float!
 
   destLatitude: Float!
   destLongitude: Float!
