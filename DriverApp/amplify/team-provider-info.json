@@ -1,0 +1,16 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-evodriverclass-dev-114241-authRole",
+      "UnauthRoleArn": "arn:aws:iam::829077700164:role/amplify-evodriverclass-dev-114241-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::829077700164:role/amplify-evodriverclass-dev-114241-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-evodriverclass-dev-114241-deployment",
+      "UnauthRoleName": "amplify-evodriverclass-dev-114241-unauthRole",
+      "StackName": "amplify-evodriverclass-dev-114241",
+      "StackId": "arn:aws:cloudformation:us-east-1:829077700164:stack/amplify-evodriverclass-dev-114241/e79a97b0-f39f-11eb-ab66-0a6046b66d41",
+      "AmplifyAppId": "d1eijl38n8tidx",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-evodriverclass-dev-114241-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    }
+  }
+}
