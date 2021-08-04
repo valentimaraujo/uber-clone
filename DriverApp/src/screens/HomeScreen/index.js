@@ -10,17 +10,16 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import config from "../../config";
 
 import {Auth, API, graphqlOperation} from 'aws-amplify';
-import {getCar} from '../../graphql/queries';
+import {getCar, listOrders} from '../../graphql/queries';
 import {updateCar} from '../../graphql/mutations';
 
-const origin = {latitude: 28.450927, longitude: -16.260845};
-const destination = {latitude: 37.771707, longitude: -122.4053769};
 const GOOGLE_MAPS_APIKEY = config.GOOGLE_MAPS_APIKEY;
 
 const HomeScreen = () => {
   const [car, setCar] = useState(null);
   const [myPosition, setMyPosition] = useState(null);
-  const [order, setOrder] = useState(null)
+  const [order, setOrder] = useState(null);
+  const [newOrders, setNewOrders] = useState([]);
 
   const [newOrder, setNewOrder] = useState(null)
   // const [newOrder, setNewOrder] = useState({
@@ -51,8 +50,24 @@ const HomeScreen = () => {
     }
   }
 
+  const fetchOrders = async () => {
+    try {
+      const ordersData = await API.graphql(
+        graphqlOperation(
+          listOrders,
+          { filter: { status: { eq: 'NEW'}}}
+        )
+      );
+      console.log(ordersData.data.listOrders.items)
+      setNewOrders(ordersData.data.listOrders.items);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
     fetchCar();
+    fetchOrders();
   }, []);
 
   const onDecline = () => {
@@ -106,7 +121,7 @@ const HomeScreen = () => {
     }
     return {
       latitude: order.originLatitude,
-      longitude: order.oreiginLongitude,
+      longitude: order.originLongitude,
     }
   }
 

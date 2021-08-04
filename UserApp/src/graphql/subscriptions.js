@@ -14,7 +14,7 @@ export const onCreateUser = /* GraphQL */ `
           type
           status
           originLatitude
-          oreiginLongitude
+          originLongitude
           destLatitude
           destLongitude
           userId
@@ -62,7 +62,7 @@ export const onUpdateUser = /* GraphQL */ `
           type
           status
           originLatitude
-          oreiginLongitude
+          originLongitude
           destLatitude
           destLongitude
           userId
@@ -110,7 +110,7 @@ export const onDeleteUser = /* GraphQL */ `
           type
           status
           originLatitude
-          oreiginLongitude
+          originLongitude
           destLatitude
           destLongitude
           userId
@@ -161,7 +161,7 @@ export const onCreateCar = /* GraphQL */ `
           type
           status
           originLatitude
-          oreiginLongitude
+          originLongitude
           destLatitude
           destLongitude
           userId
@@ -213,7 +213,7 @@ export const onUpdateCar = /* GraphQL */ `
           type
           status
           originLatitude
-          oreiginLongitude
+          originLongitude
           destLatitude
           destLongitude
           userId
@@ -265,7 +265,7 @@ export const onDeleteCar = /* GraphQL */ `
           type
           status
           originLatitude
-          oreiginLongitude
+          originLongitude
           destLatitude
           destLongitude
           userId
@@ -309,7 +309,7 @@ export const onCreateOrder = /* GraphQL */ `
       type
       status
       originLatitude
-      oreiginLongitude
+      originLongitude
       destLatitude
       destLongitude
       userId
@@ -368,7 +368,7 @@ export const onUpdateOrder = /* GraphQL */ `
       type
       status
       originLatitude
-      oreiginLongitude
+      originLongitude
       destLatitude
       destLongitude
       userId
@@ -427,7 +427,7 @@ export const onDeleteOrder = /* GraphQL */ `
       type
       status
       originLatitude
-      oreiginLongitude
+      originLongitude
       destLatitude
       destLongitude
       userId

@@ -476,7 +476,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "oreiginLongitude",
+          "name" : "originLongitude",
           "description" : null,
           "args" : [ ],
           "type" : {
@@ -932,7 +932,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "oreiginLongitude",
+          "name" : "originLongitude",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -2643,7 +2643,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "oreiginLongitude",
+          "name" : "originLongitude",
           "description" : null,
           "type" : {
             "kind" : "NON_NULL",
@@ -2753,7 +2753,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "oreiginLongitude",
+          "name" : "originLongitude",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -2891,7 +2891,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "oreiginLongitude",
+          "name" : "originLongitude",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -3947,6 +3947,23 @@
         "onFragment" : false,
         "onField" : true
       }, {
+        "name" : "deprecated",
+        "description" : null,
+        "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
+        "args" : [ {
+          "name" : "reason",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
+          },
+          "defaultValue" : "\"No longer supported\""
+        } ],
+        "onOperation" : false,
+        "onFragment" : false,
+        "onField" : false
+      }, {
         "name" : "aws_oidc",
         "description" : "Tells the service this field/object has access authorized by an OIDC token.",
         "locations" : [ "OBJECT", "FIELD_DEFINITION" ],
@@ -4000,23 +4017,6 @@
             }
           },
           "defaultValue" : null
-        } ],
-        "onOperation" : false,
-        "onFragment" : false,
-        "onField" : false
-      }, {
-        "name" : "deprecated",
-        "description" : null,
-        "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
-        "args" : [ {
-          "name" : "reason",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "String",
-            "ofType" : null
-          },
-          "defaultValue" : "\"No longer supported\""
         } ],
         "onOperation" : false,
         "onFragment" : false,
