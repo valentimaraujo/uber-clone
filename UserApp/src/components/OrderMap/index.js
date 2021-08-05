@@ -44,3 +44,4 @@ const OrderMap = ({ car }) => {
     </MapView>
   );
 };
+export default OrderMap;

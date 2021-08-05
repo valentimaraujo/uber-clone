@@ -48,6 +48,8 @@ const SearchResults = (props) => {
         )
       )
 
+      console.log(response);
+
       navigation.navigate('OrderPage', { id: response.data.createOrder.id });
     } catch (e) {
       console.error(e);
