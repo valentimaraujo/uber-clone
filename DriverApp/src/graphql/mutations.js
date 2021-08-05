@@ -10,7 +10,7 @@ export const createCar = /* GraphQL */ `
             longitude
             heading
             isActive
-            userId            
+            userId
             createdAt
             updatedAt
         }
@@ -32,6 +32,34 @@ export const updateCar = /* GraphQL */ `
             userId
             createdAt
             updatedAt
+        }
+    }
+`;
+
+export const updateOrder = /* GraphQL */ `
+    mutation UpdateOrder(
+        $input: UpdateOrderInput!
+        $condition: ModelOrderConditionInput
+    ) {
+        updateOrder(input: $input, condition: $condition) {
+            id
+            createdAt
+            type
+            status
+            originLatitude
+            originLongitude
+            destLatitude
+            destLongitude
+            userId
+            carId
+            updatedAt
+            user {
+                id
+                username
+                email
+                createdAt
+                updatedAt
+            }
         }
     }
 `;

@@ -4,8 +4,6 @@ import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import {API, graphqlOperation} from 'aws-amplify';
 import {listCars} from '../../graphql/queries';
 
-// import cars from '../../assets/data/cars';
-
 const HomeMap = (props) => {
   const [currentLocation] = useState({
     latitude: -23.61560170000001,

@@ -14,8 +14,9 @@ const HomeNavigator = (props) => {
       }}
     >
       <Stack.Screen name={"Home"} component={HomeScreen} />
-      <Stack.Screen name={"SearchResults"} component={SearchResults} />
       <Stack.Screen name={"DestinationSearch"} component={DestinationSearch} />
+      <Stack.Screen name={"SearchResults"} component={SearchResults} />
+      <Stack.Screen name={"OrderPage"} component={OrderScreen} />
     </Stack.Navigator>
   );
 };

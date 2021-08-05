@@ -12,37 +12,20 @@ import config from "../../config";
 import {Auth, API, graphqlOperation} from 'aws-amplify';
 import {getCar, listOrders} from '../../graphql/queries';
 import {updateCar} from '../../graphql/mutations';
+import {updateOrder} from "../../graphql/mutations";
 
 const GOOGLE_MAPS_APIKEY = config.GOOGLE_MAPS_APIKEY;
 
 const HomeScreen = () => {
   const [car, setCar] = useState(null);
-  const [myPosition, setMyPosition] = useState(null);
-  const [order, setOrder] = useState(null);
+  const [order, setOrder] = useState(null)
   const [newOrders, setNewOrders] = useState([]);
-
-  const [newOrder, setNewOrder] = useState(null)
-  // const [newOrder, setNewOrder] = useState({
-  //   id: '1',
-  //   type: 'UberX',
-  //
-  //   originLatitude: -23.610773,
-  //   oreiginLongitude: -46.7701274,
-  //
-  //   destLatitude: -23.594348,
-  //   destLongitude: -46.726028,
-  //
-  //   user: {
-  //     rating: 4.8,
-  //     name: 'Ciara',
-  //   }
-  // })
 
   const fetchCar = async () => {
     try {
       const userData = await Auth.currentAuthenticatedUser();
       const carData = await API.graphql(
-        graphqlOperation(getCar, {id: userData.attributes.sub}),
+        graphqlOperation(getCar, { id: userData.attributes.sub }),
       );
       setCar(carData.data.getCar);
     } catch (e) {
@@ -58,7 +41,6 @@ const HomeScreen = () => {
           { filter: { status: { eq: 'NEW'}}}
         )
       );
-      console.log(ordersData.data.listOrders.items)
       setNewOrders(ordersData.data.listOrders.items);
     } catch (e) {
       console.log(e);
@@ -71,15 +53,29 @@ const HomeScreen = () => {
   }, []);
 
   const onDecline = () => {
-    setNewOrder(null);
+    setNewOrders(newOrders.slice(1));
   }
 
-  const onAccept = (newOrder) => {
-    setOrder(newOrder);
-    setNewOrder(null);
+  const onAccept = async (newOrder) => {
+    try {
+      const input = {
+        id: newOrder.id,
+        status: "PICKING_UP_CLIENT",
+        carId: car.id
+      }
+      const orderData = await API.graphql(
+        graphqlOperation(updateOrder, { input })
+      )
+      setOrder(orderData.data.updateOrder);
+    } catch (e) {
+
+    }
+
+    setNewOrders(newOrders.slice(1));
   }
 
   const onGoPress = async () => {
+    // Update the car and set it to active
     try {
       const userData = await Auth.currentAuthenticatedUser();
       const input = {
@@ -95,8 +91,24 @@ const HomeScreen = () => {
     }
   }
 
-  const onUserLocationChange = (event) => {
-    setMyPosition(event.nativeEvent.coordinate);
+  const onUserLocationChange = async (event) => {
+    const { latitude, longitude, heading } = event.nativeEvent.coordinate
+    // Update the car and set it to active
+    try {
+      const userData = await Auth.currentAuthenticatedUser();
+      const input = {
+        id: userData.attributes.sub,
+        latitude,
+        longitude,
+        heading,
+      }
+      const updatedCarData = await API.graphql(
+        graphqlOperation(updateCar, { input })
+      )
+      setCar(updatedCarData.data.updateCar);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   const onDirectionFound = (event) => {
@@ -128,64 +140,41 @@ const HomeScreen = () => {
   const renderBottomTitle = () => {
     if (order && order.isFinished) {
       return (
-        <View style={{alignItems: 'center'}}>
-          <View style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#cb1a1a',
-            width: 200,
-            padding: 10,
-          }}>
+        <View style={{ alignItems: 'center' }}>
+          <View style={{flexDirection: 'row', alignItems: 'center',justifyContent: 'center', backgroundColor: '#cb1a1a', width: 200, padding: 10,  }}>
             <Text style={{color: 'white', fontWeight: 'bold'}}>COMPLETE {order.type}</Text>
           </View>
-          <Text style={styles.bottomText}>{order.user.name}</Text>
+          <Text style={styles.bottomText}>{order.user.username}</Text>
         </View>
       )
     }
 
     if (order && order.pickedUp) {
       return (
-        <View style={{alignItems: 'center'}}>
+        <View style={{ alignItems: 'center' }}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Text>{order.duration ? order.duration.toFixed(1) : '?'} min</Text>
-            <View style={{
-              backgroundColor: '#d41212',
-              marginHorizontal: 10,
-              width: 30,
-              height: 30,
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 20
-            }}>
-              <FontAwesome name={"user"} color={"white"} size={20}/>
+            <View style={{ backgroundColor: '#d41212', marginHorizontal: 10, width: 30, height: 30, alignItems:'center', justifyContent: 'center', borderRadius: 20}}>
+              <FontAwesome name={"user"} color={"white"} size={20} />
             </View>
             <Text>{order.distance ? order.distance.toFixed(1) : '?'} km</Text>
           </View>
-          <Text style={styles.bottomText}>Dropping off {order.user.name}</Text>
+          <Text style={styles.bottomText}>Dropping off {order?.user?.username}</Text>
         </View>
       )
     }
 
     if (order) {
       return (
-        <View style={{alignItems: 'center'}}>
+        <View style={{ alignItems: 'center' }}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Text>{order.duration ? order.duration.toFixed(1) : '?'} min</Text>
-            <View style={{
-              backgroundColor: '#1e9203',
-              marginHorizontal: 10,
-              width: 30,
-              height: 30,
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 20
-            }}>
-              <FontAwesome name={"user"} color={"white"} size={20}/>
+            <View style={{ backgroundColor: '#1e9203', marginHorizontal: 10, width: 30, height: 30, alignItems:'center', justifyContent: 'center', borderRadius: 20}}>
+              <FontAwesome name={"user"} color={"white"} size={20} />
             </View>
             <Text>{order.distance ? order.distance.toFixed(1) : '?'} km</Text>
           </View>
-          <Text style={styles.bottomText}>Picking up {order.user.name}</Text>
+          <Text style={styles.bottomText}>Picking up {order?.user?.username}</Text>
         </View>
       )
     }
@@ -204,7 +193,7 @@ const HomeScreen = () => {
         provider={PROVIDER_GOOGLE}
         showsUserLocation={true}
         onUserLocationChange={onUserLocationChange}
-        region={{
+        initialRegion={{
           latitude: -23.61560170000001,
           longitude: -46.76984249999999,
           latitudeDelta: 0.0222,
@@ -213,7 +202,10 @@ const HomeScreen = () => {
       >
         {order && (
           <MapViewDirections
-            origin={myPosition}
+            origin={{
+              latitude: car?.latitude,
+              longitude: car?.longitude,
+            }}
             onReady={onDirectionFound}
             destination={getDestination()}
             apikey={GOOGLE_MAPS_APIKEY}
@@ -228,7 +220,7 @@ const HomeScreen = () => {
         onPress={() => console.warn('Balance')}
         style={styles.balanceButton}>
         <Text style={styles.balanceText}>
-          <Text style={{color: 'green'}}>$</Text>
+          <Text style={{ color: 'green' }}>$</Text>
           {' '}
           0.00
         </Text>
@@ -269,15 +261,15 @@ const HomeScreen = () => {
       <View style={styles.bottomContainer}>
         <Ionicons name={"options"} size={30} color="#4a4a4a"/>
         {renderBottomTitle()}
-        <Entypo name={"menu"} size={30} color="#4a4a4a"/>
+        <Entypo name={"menu"} size={30} color="#4a4a4a" />
       </View>
 
-      {newOrder && <NewOrderPopup
-        newOrder={newOrder}
+      {newOrders.length > 0 && !order && <NewOrderPopup
+        newOrder={newOrders[0]}
         duration={2}
         distance={0.5}
         onDecline={onDecline}
-        onAccept={() => onAccept(newOrder)}
+        onAccept={() => onAccept(newOrders[0])}
       />}
     </View>
   );
